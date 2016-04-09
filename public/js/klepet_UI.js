@@ -74,6 +74,12 @@ function filtirirajVulgarneBesede(vhod) {
   return vhod;
 }
 
+  socket.on('dregljaj', function() {
+    $('#vsebina').jrumble();
+    $('#vsebina').trigger('startRumble');
+    setTimeout(function() { $('#vsebina').trigger('stopRumble')}, 1500);
+  });
+  
 $(document).ready(function() {
   var klepetApp = new Klepet(socket);
 
@@ -88,7 +94,12 @@ $(document).ready(function() {
     }
     $('#sporocila').append(divElementHtmlTekst(sporocilo));
   });
-
+  /*
+  socket.on('dregljaj', function() {
+    $('#vsebina').jrumble().trigger('startRumble');
+    setTimeout(function() { $('#vsebina').jrumble().trigger('stopRumble')}, 1500);
+  });
+  */
   socket.on('pridruzitevOdgovor', function(rezultat) {
     trenutniKanal = rezultat.kanal;
     $('#kanal').text(trenutniVzdevek + " @ " + trenutniKanal);
