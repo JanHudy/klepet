@@ -1,11 +1,20 @@
 function divElementEnostavniTekst(sporocilo) {
   var jeSmesko = sporocilo.indexOf('http://sandbox.lavbic.net/teaching/OIS/gradivo/') > -1;
+  var jeSlika = preveriUrl(sporocilo);
   if (jeSmesko) {
     sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />');
     return $('<div style="font-weight: bold"></div>').html(sporocilo);
+    
+  } else if(jeSlika) {
+      sporocilo = sporocilo.replace(/((https|http)?:\/\/.*\.(?:jpeg|jpg|gif|png))/gi, "<img src='$1' class='img'>");
+      return $('<div style="font-weight: bold"></div>').html(sporocilo);
   } else {
     return $('<div style="font-weight: bold;"></div>').text(sporocilo);
   }
+}
+
+function preveriUrl(sporocilo) {
+  return(sporocilo.match(/\.(jpeg|jpg|gif|png)$/) != null);
 }
 
 function divElementHtmlTekst(sporocilo) {
