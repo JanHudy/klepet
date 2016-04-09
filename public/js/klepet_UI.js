@@ -6,7 +6,7 @@ function divElementEnostavniTekst(sporocilo) {
     return $('<div style="font-weight: bold"></div>').html(sporocilo);
     
   } else if(jeSlika) {
-      sporocilo = sporocilo.replace(/((https|http)?:\/\/.*\.(?:jpeg|jpg|gif|png))/gi, "<img src='$1' class='img'>");
+      sporocilo = sporocilo.replace(/((https?:|http?:)\/\/[\d\w\.\/\_\-]+)/gi, "<img src='$1' class='img'>");
       return $('<div style="font-weight: bold"></div>').html(sporocilo);
   } else {
     return $('<div style="font-weight: bold;"></div>').text(sporocilo);
